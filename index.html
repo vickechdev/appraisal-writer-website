@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kech Developments — Hybrid Appraisal Report Writing</title>
+  <meta name="description" content="Hybrid appraisal writing and report preparation for licensed appraisers. ACI specialists, compatible with TOTAL, ClickFORMS, Appraise-It and Narrative1. 20+ years of senior appraiser experience." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+          colors: { navy: { 950: '#0B1120', 900: '#0F172A', 800: '#1E293B', 700: '#334155' } },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { background: #F8FAFC; }
+    .grid-bg {
+      background-image: linear-gradient(rgba(148,163,184,.08) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(148,163,184,.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .glow { box-shadow: 0 0 0 1px rgba(16,185,129,.25), 0 20px 60px -20px rgba(6,182,212,.45); }
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    .tab-btn[aria-selected="true"] { background: #0F172A; color: #fff; }
+    .dropzone.drag { border-color: #10B981; background: rgba(16,185,129,.08); }
+    /* Modals: centered, never taller than the viewport; header/footer fixed, middle scrolls */
+    .modal:not(.hidden) { display: flex; }
+    .modal-panel { max-height: 90vh; }
+    @supports (height: 100dvh) { .modal-panel { max-height: 90dvh; } }
+    @media (max-height: 560px) { .modal-panel { max-height: calc(100vh - 2rem); } }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] .chev { transform: rotate(180deg); }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+  </style>
+</head>
+<body class="min-h-screen overflow-x-clip font-sans text-slate-700 antialiased">
+
+<!-- ============ NAV ============ -->
+<header id="nav" class="sticky top-0 z-40 border-b border-transparent bg-white/80 backdrop-blur transition-colors">
+  <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
+    <a href="#top" class="flex items-center gap-2.5">
+      <span class="grid h-9 w-9 place-items-center rounded-lg bg-navy-900 text-white">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 16l2 2 4-4" stroke="#10B981"/></svg>
+      </span>
+      <span class="text-lg font-extrabold tracking-tight text-navy-900">Kech<span class="text-emerald-500">.</span>Developments</span>
+    </a>
+    <div class="hidden items-center gap-8 text-sm font-medium text-slate-600 lg:flex">
+      <a href="#services" class="hover:text-navy-900">Services</a>
+      <a href="#workflow" class="hover:text-navy-900">How it works</a>
+      <a href="#software" class="hover:text-navy-900">Software</a>
+      <a href="#pricing" class="hover:text-navy-900">Pricing</a>
+      <a href="#compliance" class="hover:text-navy-900">Compliance</a>
+      <a href="#faq" class="hover:text-navy-900">FAQ</a>
+    </div>
+    <div class="hidden items-center gap-3 lg:flex">
+      <a href="#contact" class="rounded-lg px-4 py-2 text-sm font-semibold text-navy-900 hover:bg-slate-100">Contact</a>
+      <button data-open-portal class="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-600">Claim Free Trial Report</button>
+    </div>
+    <button id="menuBtn" class="rounded-lg p-2 text-navy-900 lg:hidden" aria-label="Open menu" aria-expanded="false">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </nav>
+  <div id="mobileMenu" class="hidden border-t border-slate-200 bg-white px-4 pb-4 lg:hidden">
+    <div class="flex flex-col py-2 text-sm font-medium">
+      <a href="#services" class="py-2.5">Services</a>
+      <a href="#workflow" class="py-2.5">How it works</a>
+      <a href="#software" class="py-2.5">Software</a>
+      <a href="#pricing" class="py-2.5">Pricing</a>
+      <a href="#compliance" class="py-2.5">Compliance</a>
+      <a href="#faq" class="py-2.5">FAQ</a>
+      <a href="#contact" class="py-2.5">Contact</a>
+    </div>
+    <button data-open-portal class="w-full rounded-lg bg-emerald-500 py-3 text-sm font-semibold text-white">Claim Free Trial Report</button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="relative overflow-hidden bg-navy-900 text-white">
+  <div class="grid-bg absolute inset-0"></div>
+  <div class="absolute -right-40 -top-40 h-[480px] w-[480px] rounded-full bg-cyan-500/20 blur-3xl"></div>
+  <div class="absolute -bottom-40 -left-40 h-[420px] w-[420px] rounded-full bg-emerald-500/15 blur-3xl"></div>
+  <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:py-28">
+    <div>
+      <span class="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span> ACI specialists · 20+ years senior appraiser experience
+      </span>
+      <h1 class="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+        20+ Years of Appraisal Expertise,
+        <span class="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">Delivered to Your ACI Software Overnight.</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
+        Hybrid appraisal writing &amp; back-office support for licensed appraisers. Upload field notes, photos and comps in under 60 seconds — wake up to a UAD-checked, ready-to-review file in your ACI workfile.
+      </p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <button data-open-portal class="rounded-xl bg-emerald-500 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-emerald-500/25 hover:bg-emerald-400">Claim Your Free Trial Report →</button>
+        <a href="#pricing" class="rounded-xl border border-white/15 px-6 py-3.5 text-center text-base font-semibold text-white hover:bg-white/5">Estimate turnaround &amp; savings</a>
+      </div>
+      <ul class="mt-8 flex flex-wrap gap-2 text-xs font-semibold text-slate-200">
+        <li class="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-2"><svg class="h-4 w-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>USPAP-consistent confidentiality</li>
+        <li class="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-2"><svg class="h-4 w-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>UAD-checked files</li>
+        <li class="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-2"><svg class="h-4 w-4 text-cyan-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>12–24h standard · 4h rush</li>
+        <li class="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-2"><svg class="h-4 w-4 text-cyan-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M9 9h6v6H9z"/></svg>Native ACI file return</li>
+        <li class="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-2"><svg class="h-4 w-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>You keep signing authority</li>
+      </ul>
+    </div>
+
+    <!-- Hero quick-upload card -->
+    <div class="glow rounded-2xl border border-white/10 bg-navy-800/80 p-6 backdrop-blur sm:p-8">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-cyan-300">60-second order</p>
+          <h2 class="mt-1 text-xl font-bold">Start a report</h2>
+        </div>
+        <span class="rounded-md bg-white/5 px-2 py-1 font-mono text-xs text-slate-400">Step 1 of 3</span>
+      </div>
+      <form id="heroForm" class="mt-6 space-y-4">
+        <div>
+          <label class="text-sm font-medium text-slate-300" for="heroForm-type">Report type</label>
+          <select id="heroForm-type" name="formType" class="mt-1.5 w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2.5 text-sm text-white focus:border-emerald-400 focus:outline-none">
+            <option>1004 URAR — Single Family</option>
+            <option>1073 — Condo</option>
+            <option>1025 — 2–4 Unit</option>
+            <option>2055 — Exterior / Drive-By</option>
+            <option>Commercial Narrative</option>
+            <option>Land</option>
+            <option>BPO</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-sm font-medium text-slate-300" for="heroForm-sw">Your software</label>
+          <select id="heroForm-sw" name="software" class="mt-1.5 w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2.5 text-sm text-white focus:border-emerald-400 focus:outline-none">
+            <option>ACI</option><option>TOTAL / WinTOTAL</option><option>ClickFORMS</option><option>Appraise-It</option><option>Narrative1</option><option>Other</option>
+          </select>
+        </div>
+        <label class="dropzone flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-white/15 px-4 py-8 text-center transition hover:border-emerald-400/60">
+          <svg class="h-8 w-8 text-cyan-300" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0l-4 4m4-4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+          <span class="mt-2 text-sm font-semibold">Drop field notes, photos, MLS sheets</span>
+          <span class="text-xs text-slate-400">PDF, JPG, ZAP, ACI, XML, ZIP</span>
+          <input type="file" multiple class="sr-only" data-file-input />
+          <span class="file-count mt-2 hidden font-mono text-xs text-emerald-300"></span>
+        </label>
+        <button type="submit" class="w-full rounded-lg bg-emerald-500 py-3 text-sm font-semibold text-white hover:bg-emerald-400">Continue →</button>
+        <p class="text-center text-xs text-slate-400">First report free. No credit card required.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Stat bar -->
+  <div class="relative border-t border-white/10">
+    <div class="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 py-8 sm:px-6 md:grid-cols-4">
+      <div><p class="text-3xl font-extrabold"><span data-count="20">0</span>+</p><p class="text-sm text-slate-400">Years senior appraiser experience</p></div>
+      <div><p class="text-3xl font-extrabold"><span data-count="5">0</span></p><p class="text-sm text-slate-400">Appraisal platforms supported</p></div>
+      <div><p class="text-3xl font-extrabold">&lt;<span data-count="60">0</span>s</p><p class="text-sm text-slate-400">To upload an order</p></div>
+      <div><p class="text-3xl font-extrabold"><span data-count="12">0</span>–24h</p><p class="text-sm text-slate-400">Standard turnaround · 4h rush</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOFTWARE STRIP ============ -->
+<section id="software" class="border-b border-slate-200 bg-white">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+    <p class="text-center text-xs font-semibold uppercase tracking-widest text-slate-500">Built around ACI · Fully compatible with every major platform</p>
+    <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      <div class="relative rounded-xl border-2 border-emerald-500 bg-emerald-50 p-4 text-center">
+        <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-bold uppercase text-white">Primary</span>
+        <p class="text-lg font-extrabold text-navy-900">ACI</p><p class="text-xs text-slate-500">ACI Analytics / Report</p>
+      </div>
+      <div class="rounded-xl border border-slate-200 p-4 text-center"><p class="text-lg font-extrabold text-navy-900">TOTAL</p><p class="text-xs text-slate-500">WinTOTAL / TOTAL</p></div>
+      <div class="rounded-xl border border-slate-200 p-4 text-center"><p class="text-lg font-extrabold text-navy-900">ClickFORMS</p><p class="text-xs text-slate-500">Bradford</p></div>
+      <div class="rounded-xl border border-slate-200 p-4 text-center"><p class="text-lg font-extrabold text-navy-900">Appraise-It</p><p class="text-xs text-slate-500">SFREP</p></div>
+      <div class="rounded-xl border border-slate-200 p-4 text-center"><p class="text-lg font-extrabold text-navy-900">Narrative1</p><p class="text-xs text-slate-500">Commercial</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="py-20 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-emerald-600">Every property type</p>
+      <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-navy-900 sm:text-4xl">One back office for your entire pipeline</h2>
+      <p class="mt-4 text-lg text-slate-600">From a routine URAR to a commercial narrative — prepared by people who've written thousands of them.</p>
+    </div>
+
+    <div class="reveal mt-10 flex justify-center">
+      <div role="tablist" class="inline-flex flex-wrap justify-center gap-1 rounded-xl border border-slate-200 bg-white p-1">
+        <button role="tab" class="tab-btn rounded-lg px-4 py-2 text-sm font-semibold text-slate-600" aria-selected="true" data-tab="res">Residential</button>
+        <button role="tab" class="tab-btn rounded-lg px-4 py-2 text-sm font-semibold text-slate-600" aria-selected="false" data-tab="com">Commercial</button>
+        <button role="tab" class="tab-btn rounded-lg px-4 py-2 text-sm font-semibold text-slate-600" aria-selected="false" data-tab="land">Land</button>
+        <button role="tab" class="tab-btn rounded-lg px-4 py-2 text-sm font-semibold text-slate-600" aria-selected="false" data-tab="bpo">BPO</button>
+      </div>
+    </div>
+
+    <div class="mt-10">
+      <div data-panel="res" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg"><p class="font-mono text-sm text-emerald-600">FNMA 1004</p><h3 class="mt-1 text-lg font-bold text-navy-900">URAR</h3><p class="mt-2 text-sm text-slate-600">Single-family full interior reports, including FHA/VA overlays.</p></div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg"><p class="font-mono text-sm text-emerald-600">FNMA 1073</p><h3 class="mt-1 text-lg font-bold text-navy-900">Condo</h3><p class="mt-2 text-sm text-slate-600">Project data, HOA analysis and unit comparisons.</p></div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg"><p class="font-mono text-sm text-emerald-600">FNMA 1025</p><h3 class="mt-1 text-lg font-bold text-navy-900">Multi-Family</h3><p class="mt-2 text-sm text-slate-600">2–4 unit with rent schedules and income approach.</p></div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg"><p class="font-mono text-sm text-emerald-600">FNMA 2055</p><h3 class="mt-1 text-lg font-bold text-navy-900">Drive-By</h3><p class="mt-2 text-sm text-slate-600">Exterior-only reports turned fast.</p></div>
+      </div>
+      <div data-panel="com" class="hidden grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 bg-white p-6"><h3 class="text-lg font-bold text-navy-900">Narrative reports</h3><p class="mt-2 text-sm text-slate-600">Office, retail, industrial and mixed-use narratives built in Narrative1 or your template.</p></div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6"><h3 class="text-lg font-bold text-navy-900">Income &amp; expense analysis</h3><p class="mt-2 text-sm text-slate-600">Rent rolls, operating statements and cap-rate support organized for your review.</p></div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6"><h3 class="text-lg font-bold text-navy-900">Market &amp; site sections</h3><p class="mt-2 text-sm text-slate-600">Regional, neighborhood and site description drafts from your data.</p></div>
+      </div>
+      <div data-panel="land" class="hidden grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 bg-white p-6"><h3 class="text-lg font-bold text-navy-900">Vacant land</h3><p class="mt-2 text-sm text-slate-600">Residential lots, acreage and agricultural parcels.</p></div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6"><h3 class="text-lg font-bold text-navy-900">Sales comparison grids</h3><p class="mt-2 text-sm text-slate-600">Per-acre / per-lot adjustments formatted for your form.</p></div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6"><h3 class="text-lg font-bold text-navy-900">Zoning &amp; HBU narrative</h3><p class="mt-2 text-sm text-slate-600">Highest-and-best-use drafting from your research.</p></div>
+      </div>
+      <div data-panel="bpo" class="hidden grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 bg-white p-6"><h3 class="text-lg font-bold text-navy-900">Exterior &amp; interior BPOs</h3><p class="mt-2 text-sm text-slate-600">Vendor-portal-ready BPO forms completed from your photos and comps.</p></div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6"><h3 class="text-lg font-bold text-navy-900">Bulk queues</h3><p class="mt-2 text-sm text-slate-600">Send batches; we work them in order of due date.</p></div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6"><h3 class="text-lg font-bold text-navy-900">Desktop evaluations</h3><p class="mt-2 text-sm text-slate-600">Evaluations and desktop products formatted to client specs.</p></div>
+      </div>
+    </div>
+
+    <!-- Tasks -->
+    <div class="mt-20 grid gap-6 lg:grid-cols-3">
+      <div class="reveal lg:col-span-1">
+        <p class="text-sm font-semibold uppercase tracking-wider text-emerald-600">Every task</p>
+        <h3 class="mt-2 text-2xl font-extrabold text-navy-900 sm:text-3xl">Hand off the hours. Keep the judgment.</h3>
+        <p class="mt-4 text-slate-600">We handle the data entry, formatting and compliance checks. You make the valuation calls and sign the report.</p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:col-span-2">
+        <div class="reveal flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-cyan-50 text-cyan-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6M7 4h10a2 2 0 012 2v14l-3-2-2 2-2-2-2 2-2-2-3 2V6a2 2 0 012-2z"/></svg></span>
+          <div><h4 class="font-bold text-navy-900">Field note transcription</h4><p class="mt-1 text-sm text-slate-600">Handwritten notes, voice memos and inspection apps into the form.</p></div>
+        </div>
+        <div class="reveal flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-cyan-50 text-cyan-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
+          <div><h4 class="font-bold text-navy-900">MLS comp formatting</h4><p class="mt-1 text-sm text-slate-600">Your selected comps loaded into the grid with consistent data.</p></div>
+        </div>
+        <div class="reveal flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-cyan-50 text-cyan-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 12h8V4"/></svg></span>
+          <div><h4 class="font-bold text-navy-900">Sketch integration</h4><p class="mt-1 text-sm text-slate-600">Floor plans drawn and GLA calculated per ANSI Z765.</p></div>
+        </div>
+        <div class="reveal flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-cyan-50 text-cyan-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/></svg></span>
+          <div><h4 class="font-bold text-navy-900">1004MC market analysis</h4><p class="mt-1 text-sm text-slate-600">Market conditions addendum built from your MLS export.</p></div>
+        </div>
+        <div class="reveal flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-emerald-50 text-emerald-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <div><h4 class="font-bold text-navy-900">UAD compliance validation</h4><p class="mt-1 text-sm text-slate-600">Pre-checked against UAD formatting before it reaches you.</p></div>
+        </div>
+        <div class="reveal flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-emerald-50 text-emerald-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v6h6M20 20v-6h-6"/><path d="M20 10a8 8 0 00-14-4M4 14a8 8 0 0014 4"/></svg></span>
+          <div><h4 class="font-bold text-navy-900">Stipulations &amp; revisions</h4><p class="mt-1 text-sm text-slate-600">Lender and AMC revision requests handled fast.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORKFLOW ============ -->
+<section id="workflow" class="bg-white py-20 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-emerald-600">How it works</p>
+      <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-navy-900 sm:text-4xl">Three steps. Zero friction.</h2>
+    </div>
+    <ol class="mt-14 grid gap-6 md:grid-cols-3">
+      <li class="reveal relative rounded-2xl bg-slate-50 p-8">
+        <span class="font-mono text-sm font-medium text-cyan-600">01 — Upload</span>
+        <h3 class="mt-3 text-xl font-bold text-navy-900">Send your inspection package</h3>
+        <p class="mt-3 text-slate-600">Field notes, photos, sketch measurements, MLS comps and the engagement letter. Drag, drop, done.</p>
+        <p class="mt-6 inline-block rounded-md bg-white px-2 py-1 font-mono text-xs text-slate-500">~60 seconds</p>
+      </li>
+      <li class="reveal relative rounded-2xl bg-slate-50 p-8">
+        <span class="font-mono text-sm font-medium text-cyan-600">02 — Prepare</span>
+        <h3 class="mt-3 text-xl font-bold text-navy-900">We build the report</h3>
+        <p class="mt-3 text-slate-600">Senior-reviewed data entry, comp grid, sketch, 1004MC and UAD checks — inside your software.</p>
+        <p class="mt-6 inline-block rounded-md bg-white px-2 py-1 font-mono text-xs text-slate-500">12–24 hours · 4h rush</p>
+      </li>
+      <li class="reveal relative rounded-2xl bg-navy-900 p-8 text-white">
+        <span class="font-mono text-sm font-medium text-emerald-400">03 — Review &amp; sign</span>
+        <h3 class="mt-3 text-xl font-bold">You review, adjust, sign</h3>
+        <p class="mt-3 text-slate-300">Open the native file, apply your valuation judgment, and deliver. Revisions are on us.</p>
+        <p class="mt-6 inline-block rounded-md bg-white/10 px-2 py-1 font-mono text-xs text-slate-300">Your license. Your call.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ WHY / COMPARISON ============ -->
+<section id="edge" class="py-20 sm:py-24">
+  <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2">
+    <div class="reveal">
+      <p class="text-sm font-semibold uppercase tracking-wider text-emerald-600">The 20+ Year Edge</p>
+      <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-navy-900 sm:text-4xl">Cheap typing isn't cheap when you have to fix it</h2>
+      <p class="mt-4 text-lg text-slate-600">Low-cost typing services move data from one box to another. We prepare reports the way a senior appraiser would — catching the inconsistencies reviewers flag, so you spend your time on valuation, not proofreading.</p>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-slate-200 bg-white p-4"><p class="font-bold text-navy-900">Senior-level review</p><p class="mt-1 text-sm text-slate-600">Every file checked by someone who knows what reviewers flag.</p></div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4"><p class="font-bold text-navy-900">Confidential by default</p><p class="mt-1 text-sm text-slate-600">NDA available on request. Files used only for your report.</p></div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4"><p class="font-bold text-navy-900">Your templates</p><p class="mt-1 text-sm text-slate-600">We learn your comment library, addenda and style.</p></div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4"><p class="font-bold text-navy-900">Direct communication</p><p class="mt-1 text-sm text-slate-600">Talk to the person working your file, not a ticket queue.</p></div>
+      </div>
+    </div>
+    <div class="reveal overflow-x-auto rounded-2xl border border-slate-200 bg-white">
+      <table class="w-full min-w-[520px] text-sm">
+        <thead class="bg-slate-50 text-left text-xs uppercase tracking-wider text-slate-500">
+          <tr><th class="px-4 py-3 font-semibold"></th><th class="px-4 py-3 font-semibold">Low-cost offshore typists</th><th class="px-4 py-3 font-semibold text-emerald-700">Kech Developments</th></tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="px-4 py-3 font-medium text-navy-900">Who prepares your file</td><td class="px-4 py-3 text-slate-500">Data-entry staff</td><td class="px-4 py-3 font-semibold text-emerald-600">20+ yr appraisal expertise</td></tr>
+          <tr><td class="px-4 py-3 font-medium text-navy-900">Error rate</td><td class="px-4 py-3 text-slate-500">You find &amp; fix the mistakes</td><td class="px-4 py-3 font-semibold text-emerald-600">Checked before it reaches you</td></tr>
+          <tr><td class="px-4 py-3 font-medium text-navy-900">Instructions needed</td><td class="px-4 py-3 text-slate-500">Endless hand-holding</td><td class="px-4 py-3 font-semibold text-emerald-600">Understands the work</td></tr>
+          <tr><td class="px-4 py-3 font-medium text-navy-900">UAD &amp; reviewer red flags</td><td class="px-4 py-3 text-slate-500">Rarely caught</td><td class="px-4 py-3 font-semibold text-emerald-600">Validated every file</td></tr>
+          <tr><td class="px-4 py-3 font-medium text-navy-900">ACI expertise</td><td class="px-4 py-3 text-slate-500">Generalist</td><td class="px-4 py-3 font-semibold text-emerald-600">Primary specialization</td></tr>
+          <tr><td class="px-4 py-3 font-medium text-navy-900">Commercial, land &amp; BPO</td><td class="px-4 py-3 text-slate-500">Often excluded</td><td class="px-4 py-3 font-semibold text-emerald-600">All included</td></tr>
+          <tr><td class="px-4 py-3 font-medium text-navy-900">Stips &amp; revisions</td><td class="px-4 py-3 text-slate-500">Slow, extra fees</td><td class="px-4 py-3 font-semibold text-emerald-600">Fast, included</td></tr>
+          <tr><td class="px-4 py-3 font-medium text-navy-900">Communication</td><td class="px-4 py-3 text-slate-500">Ticket queues, time-zone lag</td><td class="px-4 py-3 font-semibold text-emerald-600">Direct, appraiser-to-appraiser</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ESTIMATOR ============ -->
+<section id="pricing" class="bg-navy-900 py-20 text-white sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-emerald-400">Turnaround &amp; volume calculator</p>
+      <h2 class="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">See your delivery time and bulk savings</h2>
+      <p class="mt-4 text-slate-300">12–24h standard or 4h rush. Pay per report, no subscriptions — and your first report is free.</p>
+    </div>
+    <div class="reveal mx-auto mt-12 grid max-w-5xl gap-6 lg:grid-cols-5">
+      <div class="space-y-6 rounded-2xl border border-white/10 bg-navy-800 p-6 lg:col-span-3 sm:p-8">
+        <div>
+          <label class="text-sm font-medium text-slate-300" for="calcType">Report type</label>
+          <select id="calcType" class="mt-1.5 w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2.5 text-sm focus:border-emerald-400 focus:outline-none"></select>
+        </div>
+        <div>
+          <p class="text-sm font-medium text-slate-300">Turnaround</p>
+          <div id="calcSpeed" class="mt-1.5 grid grid-cols-3 gap-2"></div>
+        </div>
+        <div>
+          <p class="text-sm font-medium text-slate-300">Add-ons</p>
+          <div id="calcAddons" class="mt-1.5 grid gap-2 sm:grid-cols-2"></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm"><label class="font-medium text-slate-300" for="calcVol">Monthly volume</label><span class="font-mono text-emerald-300"><span id="calcVolOut">10</span> reports</span></div>
+          <input id="calcVol" type="range" min="1" max="100" value="10" class="mt-3 w-full accent-emerald-500" />
+        </div>
+      </div>
+      <div class="flex flex-col justify-between rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-600 p-6 lg:col-span-2 sm:p-8">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-wider text-emerald-50">Estimated per report</p>
+          <p class="mt-2 text-5xl font-extrabold">$<span id="calcPer">0</span></p>
+          <p id="calcDiscount" class="mt-2 text-sm text-emerald-50"></p>
+          <div class="mt-6 grid grid-cols-2 gap-4 border-t border-white/25 pt-4">
+            <div><p class="text-sm text-emerald-50">Estimated monthly</p><p class="text-2xl font-bold">$<span id="calcMonth">0</span></p></div>
+            <div><p class="text-sm text-emerald-50">Bulk savings / mo</p><p class="text-2xl font-bold">$<span id="calcSave">0</span></p></div>
+          </div>
+          <div class="mt-4 rounded-xl bg-white/15 p-3">
+            <p class="text-xs uppercase tracking-wider text-emerald-50">If you upload now, expect it by</p>
+            <p id="calcEta" class="mt-0.5 font-mono text-sm font-medium"></p>
+          </div>
+        </div>
+        <button data-open-portal class="mt-8 w-full rounded-xl bg-white py-3 text-sm font-bold text-navy-900 hover:bg-slate-100">Start with a free report</button>
+        <p class="mt-3 text-center text-xs text-emerald-50/80">Estimates only. Final quote confirmed per assignment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPLIANCE ============ -->
+<section id="compliance" class="bg-white py-20 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-emerald-600">Legal &amp; compliance</p>
+      <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-navy-900 sm:text-4xl">Your license is on the line. We treat it that way.</h2>
+    </div>
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      <div class="reveal flex flex-col rounded-2xl border border-slate-200 bg-slate-50 p-8">
+        <span class="grid h-11 w-11 place-items-center rounded-xl bg-emerald-100 text-emerald-700"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        <h3 class="mt-5 text-xl font-bold text-navy-900">Appraiser Confidentiality Statement</h3>
+        <p class="mt-3 flex-1 text-slate-600">Every assignment file, client name, borrower detail and inspection record is handled under strict confidentiality and non-disclosure protocols consistent with the Confidentiality section of the USPAP Ethics Rule. Nothing is disclosed to anyone other than you, the appraiser of record.</p>
+        <button data-legal="confidentiality" class="mt-6 self-start text-sm font-semibold text-emerald-700 hover:underline">Read the full statement →</button>
+      </div>
+      <div class="reveal flex flex-col rounded-2xl border border-slate-200 bg-slate-50 p-8">
+        <span class="grid h-11 w-11 place-items-center rounded-xl bg-cyan-100 text-cyan-700"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg></span>
+        <h3 class="mt-5 text-xl font-bold text-navy-900">Appraiser Responsibility Disclaimer</h3>
+        <p class="mt-3 flex-1 text-slate-600">Kech Developments provides administrative, drafting and data-preparation services only. The licensed or certified appraiser of record retains sole authority over, and responsibility for, all analyses, opinions and conclusions, the final value, and the signed certification.</p>
+        <button data-legal="disclaimer" class="mt-6 self-start text-sm font-semibold text-emerald-700 hover:underline">Read the full disclaimer →</button>
+      </div>
+    </div>
+    <div class="reveal mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-slate-500">
+      <span>Data never sold or shared</span><span class="hidden text-slate-300 sm:inline">•</span>
+      <span>NDA available on request</span><span class="hidden text-slate-300 sm:inline">•</span>
+      <button data-legal="privacy" class="font-semibold text-navy-900 hover:underline">Privacy Policy</button><span class="hidden text-slate-300 sm:inline">•</span>
+      <button data-legal="terms" class="font-semibold text-navy-900 hover:underline">Terms of Service</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="py-20 sm:py-24">
+  <div class="mx-auto max-w-3xl px-4 sm:px-6">
+    <div class="reveal text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-emerald-600">FAQ</p>
+      <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-navy-900 sm:text-4xl">Questions appraisers ask us</h2>
+    </div>
+    <div class="mt-10 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
+      <details class="group p-6" open>
+        <summary class="flex cursor-pointer items-center justify-between font-semibold text-navy-900">Who signs the report?<svg class="chev h-5 w-5 text-slate-400 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <p class="mt-3 text-slate-600">You do — always. We prepare the report; the valuation opinion, final adjustments, reconciliation and signature remain yours as the licensed appraiser.</p>
+      </details>
+      <details class="group p-6">
+        <summary class="flex cursor-pointer items-center justify-between font-semibold text-navy-900">Do you work directly in ACI?<svg class="chev h-5 w-5 text-slate-400 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <p class="mt-3 text-slate-600">Yes. ACI is our primary platform, and we return native files. We also work in TOTAL/WinTOTAL, ClickFORMS, Appraise-It and Narrative1.</p>
+      </details>
+      <details class="group p-6">
+        <summary class="flex cursor-pointer items-center justify-between font-semibold text-navy-900">What should I upload?<svg class="chev h-5 w-5 text-slate-400 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <p class="mt-3 text-slate-600">Engagement letter, inspection notes (any format), photos, sketch measurements, your selected MLS comps and any prior workfile. If something's missing, we'll ask.</p>
+      </details>
+      <details class="group p-6">
+        <summary class="flex cursor-pointer items-center justify-between font-semibold text-navy-900">How is my data protected?<svg class="chev h-5 w-5 text-slate-400 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <p class="mt-3 text-slate-600">Files are used only to prepare your report and are never sold or shared. We follow confidentiality protocols consistent with the USPAP Ethics Rule and are happy to sign an NDA before your first order. See our <button data-legal="privacy" class="font-semibold text-emerald-700 underline">Privacy Policy</button>.</p>
+      </details>
+      <details class="group p-6">
+        <summary class="flex cursor-pointer items-center justify-between font-semibold text-navy-900">How does the free trial report work?<svg class="chev h-5 w-5 text-slate-400 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <p class="mt-3 text-slate-600">Send one standard residential assignment. We prepare it at no charge so you can judge quality and fit before committing to anything.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT / FINAL CTA ============ -->
+<section id="contact" class="pb-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="reveal relative overflow-hidden rounded-3xl bg-navy-900 px-6 py-14 text-white sm:px-12">
+      <div class="grid-bg absolute inset-0"></div>
+      <div class="relative grid gap-10 lg:grid-cols-2">
+        <div>
+          <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Get your next report off your desk.</h2>
+          <p class="mt-4 text-lg text-slate-300">Claim your free trial report, or send us a question — a senior appraiser will reply.</p>
+          <div class="mt-8 space-y-3 text-sm">
+            <a data-email-link class="flex items-center gap-3 text-slate-200 hover:text-white"><svg class="h-5 w-5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 6l8 7 8-7"/></svg><span data-email-text></span></a>
+            <a data-phone-link class="flex items-center gap-3 text-slate-200 hover:text-white"><svg class="h-5 w-5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg><span data-phone-text></span></a>
+          </div>
+        </div>
+        <form id="contactForm" class="space-y-3 rounded-2xl bg-white p-6 text-slate-700">
+          <div class="grid gap-3 sm:grid-cols-2">
+            <input required name="name" placeholder="Full name" class="rounded-lg border border-slate-200 px-3 py-2.5 text-sm focus:border-emerald-500 focus:outline-none" />
+            <input required type="email" name="email" placeholder="Email" class="rounded-lg border border-slate-200 px-3 py-2.5 text-sm focus:border-emerald-500 focus:outline-none" />
+          </div>
+          <input name="company" placeholder="Company / license state (optional)" class="w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm focus:border-emerald-500 focus:outline-none" />
+          <textarea required name="message" rows="4" placeholder="How can we help?" class="w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm focus:border-emerald-500 focus:outline-none"></textarea>
+          <button class="w-full rounded-lg bg-navy-900 py-3 text-sm font-semibold text-white hover:bg-navy-800">Send message</button>
+          <p class="form-status hidden text-center text-sm font-medium text-emerald-600"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="border-t border-slate-200 bg-white pb-16 sm:pb-0">
+  <div class="mx-auto max-w-7xl px-4 py-8 text-sm text-slate-500 sm:px-6">
+    <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+      <p>© <span id="year"></span> Kech Developments. All rights reserved.</p>
+      <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+        <button data-legal="privacy" class="hover:text-navy-900">Privacy Policy</button>
+        <button data-legal="terms" class="hover:text-navy-900">Terms of Service</button>
+        <button data-legal="confidentiality" class="hover:text-navy-900">Confidentiality</button>
+        <button data-legal="disclaimer" class="hover:text-navy-900">Appraiser Disclaimer</button>
+      </div>
+    </div>
+    <p class="mt-6 border-t border-slate-100 pt-6 text-center text-xs leading-relaxed text-slate-400">Kech Developments provides administrative, drafting and data-preparation services to licensed and certified appraisers. Kech Developments does not perform appraisals, develop or communicate opinions of value, or sign appraisal reports. The appraiser of record is solely responsible for all valuation conclusions and certifications.</p>
+  </div>
+</footer>
+
+<!-- Mobile sticky CTA -->
+<div class="fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 p-3 backdrop-blur sm:hidden">
+  <button data-open-portal class="w-full rounded-lg bg-emerald-500 py-3 text-sm font-semibold text-white">Claim Free Trial Report</button>
+</div>
+
+<!-- ============ ORDER PORTAL MODAL ============ -->
+<div id="portal" class="modal fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="portalTitle">
+  <div data-close-portal class="absolute inset-0 bg-navy-950/70 backdrop-blur-sm"></div>
+  <div class="modal-panel relative flex w-full max-w-xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+    <div class="flex shrink-0 items-center justify-between border-b border-slate-100 px-6 py-4">
+      <div>
+        <h2 id="portalTitle" class="text-lg font-bold text-navy-900">Claim your free trial report</h2>
+        <p class="text-xs text-slate-500">Step <span id="stepNum">1</span> of 3 · <span id="stepName">Property form</span></p>
+      </div>
+      <button data-close-portal class="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700" aria-label="Close">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="h-1 shrink-0 bg-slate-100"><div id="progress" class="h-1 bg-gradient-to-r from-emerald-500 to-cyan-500 transition-all" style="width:33%"></div></div>
+
+    <form id="portalForm" class="min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 py-6" novalidate>
+      <!-- Step 1 -->
+      <fieldset data-step="1" class="space-y-4">
+        <div>
+          <label class="text-sm font-medium text-navy-900" for="pf-type">Report type</label>
+          <select id="pf-type" name="formType" class="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm focus:border-emerald-500 focus:outline-none">
+            <option>1004 URAR — Single Family</option><option>1073 — Condo</option><option>1025 — 2–4 Unit</option><option>2055 — Exterior / Drive-By</option><option>Commercial Narrative</option><option>Land</option><option>BPO</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-sm font-medium text-navy-900" for="pf-sw">Software</label>
+          <select id="pf-sw" name="software" class="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm focus:border-emerald-500 focus:outline-none">
+            <option>ACI</option><option>TOTAL / WinTOTAL</option><option>ClickFORMS</option><option>Appraise-It</option><option>Narrative1</option><option>Other</option>
+          </select>
+        </div>
+        <div>
+          <p class="text-sm font-medium text-navy-900">Tasks needed</p>
+          <div class="mt-1.5 grid gap-2 text-sm sm:grid-cols-2">
+            <label class="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2"><input type="checkbox" name="tasks" value="Full report preparation" checked class="accent-emerald-500" />Full report prep</label>
+            <label class="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2"><input type="checkbox" name="tasks" value="Sketch" class="accent-emerald-500" />Sketch</label>
+            <label class="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2"><input type="checkbox" name="tasks" value="1004MC" class="accent-emerald-500" />1004MC</label>
+            <label class="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2"><input type="checkbox" name="tasks" value="Revision / stip" class="accent-emerald-500" />Revision / stip</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Step 2 -->
+      <fieldset data-step="2" class="hidden space-y-4">
+        <label class="dropzone flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 px-4 py-10 text-center transition hover:border-emerald-400">
+          <svg class="h-10 w-10 text-cyan-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0l-4 4m4-4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+          <span class="mt-3 font-semibold text-navy-900">Drag &amp; drop your files</span>
+          <span class="text-sm text-slate-500">or click to browse</span>
+          <input type="file" multiple class="sr-only" data-file-input id="portalFiles" />
+        </label>
+        <ul id="fileList" class="space-y-2 text-sm"></ul>
+        <div>
+          <label class="text-sm font-medium text-navy-900" for="pf-notes">Notes for the writer (optional)</label>
+          <textarea id="pf-notes" name="notes" rows="3" placeholder="Client overlays, comment preferences, due date…" class="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm focus:border-emerald-500 focus:outline-none"></textarea>
+        </div>
+      </fieldset>
+
+      <!-- Step 3 -->
+      <fieldset data-step="3" class="hidden space-y-3">
+        <div>
+          <p class="text-sm font-medium text-navy-900">Turnaround</p>
+          <div class="mt-1.5 grid grid-cols-3 gap-2 text-sm">
+            <label class="cursor-pointer"><input type="radio" name="turnaround" value="Standard 24h" class="peer sr-only" checked /><span class="block rounded-lg border border-slate-200 px-1 py-2.5 text-center peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:font-semibold">24h<span class="block text-[11px] font-normal text-slate-500">Standard</span></span></label>
+            <label class="cursor-pointer"><input type="radio" name="turnaround" value="Overnight 12h" class="peer sr-only" /><span class="block rounded-lg border border-slate-200 px-1 py-2.5 text-center peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:font-semibold">12h<span class="block text-[11px] font-normal text-slate-500">Overnight</span></span></label>
+            <label class="cursor-pointer"><input type="radio" name="turnaround" value="Rush 4h" class="peer sr-only" /><span class="block rounded-lg border border-slate-200 px-1 py-2.5 text-center peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:font-semibold">4h<span class="block text-[11px] font-normal text-slate-500">Rush</span></span></label>
+          </div>
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <div><label class="text-sm font-medium text-navy-900" for="pf-name">Full name</label><input id="pf-name" required name="name" class="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm focus:border-emerald-500 focus:outline-none" /></div>
+          <div><label class="text-sm font-medium text-navy-900" for="pf-email">Email</label><input id="pf-email" required type="email" name="email" class="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm focus:border-emerald-500 focus:outline-none" /></div>
+          <div><label class="text-sm font-medium text-navy-900" for="pf-phone">Phone (optional)</label><input id="pf-phone" type="tel" name="phone" class="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm focus:border-emerald-500 focus:outline-none" /></div>
+          <div><label class="text-sm font-medium text-navy-900" for="pf-state">License state</label><input id="pf-state" required name="state" maxlength="2" placeholder="e.g. TX" class="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm uppercase focus:border-emerald-500 focus:outline-none" /></div>
+        </div>
+        <label class="flex items-start gap-2 text-sm text-slate-600"><input required type="checkbox" name="agree" class="mt-0.5 accent-emerald-500" /><span>I'm the appraiser of record for this assignment and retain sole responsibility for the valuation and signature. I agree to the <button type="button" data-legal="terms" class="font-semibold text-emerald-700 underline">Terms</button>, <button type="button" data-legal="privacy" class="font-semibold text-emerald-700 underline">Privacy Policy</button> and <button type="button" data-legal="disclaimer" class="font-semibold text-emerald-700 underline">Responsibility Disclaimer</button>.</span></label>
+        <div id="summary" class="rounded-xl bg-slate-50 p-4 font-mono text-xs text-slate-600"></div>
+      </fieldset>
+
+      <!-- Done -->
+      <div data-step="done" class="hidden py-8 text-center">
+        <span class="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-100 text-emerald-600"><svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span>
+        <h3 class="mt-4 text-xl font-bold text-navy-900">Order received</h3>
+        <p id="doneMsg" class="mt-2 text-slate-600">We'll confirm by email shortly with your secure file-transfer link.</p>
+      </div>
+      <p id="stepError" class="mt-3 hidden text-sm font-medium text-red-600"></p>
+    </form>
+
+    <div id="portalFooter" class="flex shrink-0 items-center justify-between border-t border-slate-100 px-6 py-4">
+      <button id="backBtn" class="invisible rounded-lg px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100">← Back</button>
+      <button id="nextBtn" class="rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-600">Continue →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ LEGAL MODAL ============ -->
+<div id="legal" class="modal fixed inset-0 z-[60] hidden items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+  <div data-close-legal class="absolute inset-0 bg-navy-950/70 backdrop-blur-sm"></div>
+  <div class="modal-panel relative flex w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+    <div class="flex shrink-0 items-center justify-between gap-4 border-b border-slate-100 px-6 py-4">
+      <h2 id="legalTitle" class="text-lg font-bold text-navy-900"></h2>
+      <button data-close-legal class="shrink-0 rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700" aria-label="Close">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div id="legalBody" class="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-6 py-6 text-sm leading-relaxed text-slate-600 [&_h3]:mt-2 [&_h3]:font-bold [&_h3]:text-navy-900 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5"></div>
+    <div class="shrink-0 border-t border-slate-100 px-6 py-3 text-xs text-slate-400">Last updated: <span data-legal-updated></span></div>
+  </div>
+</div>
+
+<template data-legal-doc="confidentiality" data-title="Appraiser Confidentiality Statement">
+  <p>Kech Developments recognizes that appraisers are bound by the confidentiality obligations of the Ethics Rule of the Uniform Standards of Professional Appraisal Practice (USPAP). Because we work on your assignments, we hold ourselves to standards consistent with those obligations.</p>
+  <h3>What we protect</h3>
+  <ul>
+    <li>Confidential information received from or on behalf of your client, including borrower and owner identities, loan details and engagement documents.</li>
+    <li>Assignment results and any draft analyses, adjustments or commentary we prepare for you.</li>
+    <li>Inspection notes, photographs, sketches, MLS data and workfile contents.</li>
+  </ul>
+  <h3>How we protect it</h3>
+  <ul>
+    <li>Information is used solely to prepare the assignment you send us.</li>
+    <li>Nothing is disclosed to any party other than you, the appraiser of record, unless you direct us in writing or we are required by law.</li>
+    <li>Access is limited to the personnel working your file.</li>
+    <li>We never contact your clients, lenders, AMCs or borrowers.</li>
+    <li>Files are deleted or returned on your request, subject to any legal retention requirements.</li>
+  </ul>
+  <h3>Non-disclosure agreements</h3>
+  <p>We will sign a mutual NDA before your first order on request.</p>
+  <p>Questions: <a data-email-link class="font-semibold text-emerald-700 underline"><span data-email-text></span></a></p>
+</template>
+
+<template data-legal-doc="disclaimer" data-title="Appraiser Responsibility Disclaimer">
+  <p>Kech Developments provides <strong>administrative, drafting and data-preparation services</strong> to licensed and certified real estate appraisers.</p>
+  <h3>What we do</h3>
+  <ul>
+    <li>Transcribe and enter data supplied by the appraiser into appraisal forms and software.</li>
+    <li>Format comparable sales data selected or supplied by the appraiser.</li>
+    <li>Prepare sketches, market-condition data compilations (e.g. 1004MC) and draft narrative sections from the appraiser's inputs.</li>
+    <li>Check formatting against UAD and client requirements, and assist with stipulation and revision requests.</li>
+  </ul>
+  <h3>What we do not do</h3>
+  <ul>
+    <li>We do not perform appraisals or develop or communicate opinions of value.</li>
+    <li>We do not inspect properties, select final comparables, make final adjustments or reconcile value.</li>
+    <li>We do not sign, certify or transmit appraisal reports.</li>
+  </ul>
+  <h3>Appraiser of record</h3>
+  <p>The licensed or certified appraiser of record retains sole authority over, and full responsibility for, all analyses, opinions, conclusions, the final value, the signed certification, and compliance with USPAP, state law and client requirements. The appraiser must review all work we prepare before signing, and should disclose assistance in the report as required by USPAP and applicable regulations.</p>
+</template>
+
+<template data-legal-doc="privacy" data-title="Privacy Policy">
+  <p>This policy explains how Kech Developments ("we", "us") handles information submitted through this website and in the course of providing our services.</p>
+  <h3>Information we collect</h3>
+  <ul>
+    <li><strong>Contact details</strong> you provide: name, email, phone, company and license state.</li>
+    <li><strong>Assignment files</strong> you upload: inspection notes, photographs, sketches, MLS data, engagement letters and workfiles.</li>
+    <li><strong>Basic technical data</strong> such as browser type, collected by our hosting provider for security and operation.</li>
+  </ul>
+  <h3>How we use it</h3>
+  <ul>
+    <li>To prepare the reports and services you request, and to communicate with you about them.</li>
+    <li>To respond to inquiries and send quotes or invoices.</li>
+  </ul>
+  <h3>We never sell or share your data</h3>
+  <p>We do not sell, rent or trade your information or your clients' information. We do not share it with third parties except service providers needed to operate our business (such as secure file storage and email), who are bound to protect it, or where required by law.</p>
+  <h3>Security</h3>
+  <p>Uploaded files are transferred over encrypted connections and stored with access limited to the personnel working your assignment.</p>
+  <h3>Retention</h3>
+  <p>We keep assignment files only as long as needed to complete the work and handle revisions, then delete them, unless you ask us to keep them or the law requires otherwise. You may request deletion at any time.</p>
+  <h3>Your choices</h3>
+  <p>You may request access to, correction of, or deletion of your personal information by contacting <a data-email-link class="font-semibold text-emerald-700 underline"><span data-email-text></span></a>.</p>
+</template>
+
+<template data-legal-doc="terms" data-title="Terms of Service">
+  <p>By using this website or ordering services from Kech Developments, you agree to these terms.</p>
+  <h3>1. Services</h3>
+  <p>We provide administrative, drafting and data-preparation support to licensed and certified appraisers. We do not provide appraisals or opinions of value. See the Appraiser Responsibility Disclaimer.</p>
+  <h3>2. Your responsibilities</h3>
+  <ul>
+    <li>You confirm you are the appraiser of record (or authorized by them) and are permitted to share the files you upload.</li>
+    <li>You will review all prepared work and remain solely responsible for the final report, value conclusion and certification.</li>
+    <li>You are responsible for compliance with USPAP, state regulations and client requirements, including any disclosure of assistance.</li>
+  </ul>
+  <h3>3. Turnaround</h3>
+  <p>Turnaround times are estimates measured from receipt of a complete file. Missing information may delay delivery.</p>
+  <h3>4. Fees</h3>
+  <p>Prices shown on this site are estimates. The fee for each assignment is confirmed before work begins. Your first trial report is free of charge.</p>
+  <h3>5. Revisions</h3>
+  <p>Revisions and stipulations relating to work we prepared are included at no additional charge.</p>
+  <h3>6. Confidentiality &amp; privacy</h3>
+  <p>We handle your files as described in our Confidentiality Statement and Privacy Policy.</p>
+  <h3>7. Limitation of liability</h3>
+  <p>To the extent permitted by law, our total liability for any assignment is limited to the fee paid for that assignment. We are not liable for valuation conclusions, which remain the responsibility of the appraiser of record.</p>
+  <h3>8. Changes</h3>
+  <p>We may update these terms. Continued use after changes means you accept them.</p>
+  <p>Questions: <a data-email-link class="font-semibold text-emerald-700 underline"><span data-email-text></span></a></p>
+</template>
+
+<script>
+/* ==========================================================
+   CONFIG — edit these before going live
+   ========================================================== */
+const CONFIG = {
+  contactEmail: 'orders@your-domain.com',   // TODO: your real address
+  legalUpdated: 'October 2026',             // date shown at the bottom of each legal document
+  phone: '(000) 000-0000',                  // TODO: your real number
+  // Form endpoint (e.g. Formspree / Basin / your API). If empty, forms fall back to opening the visitor's email client.
+  // Note: file attachments are only sent when an endpoint is configured.
+  formEndpoint: '',
+  // Placeholder prices (USD) — replace with your real rates.
+  prices: {
+    '1004 URAR': 95, '1073 Condo': 95, '1025 Multi-Family': 140, '2055 Drive-By': 65,
+    'Commercial Narrative': 450, 'Land': 85, 'BPO': 35,
+  },
+  speed: [
+    { label: '24h', sub: 'Standard', hours: 24, mult: 1 },
+    { label: '12h', sub: 'Overnight', hours: 12, mult: 1.15 },
+    { label: '4h', sub: 'Rush', hours: 4, mult: 1.6 },
+  ],
+  addons: [{ label: 'Sketch', price: 20 }, { label: '1004MC', price: 15 }, { label: 'Rent schedule', price: 25 }, { label: 'Photo addendum', price: 10 }],
+  volumeTiers: [{ min: 50, off: 0.15 }, { min: 25, off: 0.10 }, { min: 10, off: 0.05 }],
+};
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+$('#year').textContent = new Date().getFullYear();
+function fillContact(root) {
+  $$('[data-email-text]', root).forEach(e => e.textContent = CONFIG.contactEmail);
+  $$('[data-email-link]', root).forEach(a => a.href = 'mailto:' + CONFIG.contactEmail);
+}
+fillContact(document);
+$$('[data-legal-updated]').forEach(e => e.textContent = CONFIG.legalUpdated);
+$$('[data-phone-text]').forEach(e => e.textContent = CONFIG.phone);
+$$('[data-phone-link]').forEach(a => a.href = 'tel:' + CONFIG.phone.replace(/[^\d+]/g, ''));
+
+/* ---------- Nav ---------- */
+const nav = $('#nav');
+addEventListener('scroll', () => nav.classList.toggle('border-slate-200', scrollY > 8), { passive: true });
+const menuBtn = $('#menuBtn'), mobileMenu = $('#mobileMenu');
+menuBtn.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('hidden') === false;
+  menuBtn.setAttribute('aria-expanded', open);
+});
+$$('#mobileMenu a, #mobileMenu button').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+/* ---------- Reveal + counters ---------- */
+const io = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: 0.12 });
+$$('.reveal').forEach(el => io.observe(el));
+
+$$('[data-count]').forEach(el => {
+  const target = +el.dataset.count, start = performance.now(), dur = 1200;
+  const tick = t => {
+    const p = Math.min((t - start) / dur, 1);
+    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+});
+
+/* ---------- Service tabs ---------- */
+$$('.tab-btn').forEach(btn => btn.addEventListener('click', () => {
+  $$('.tab-btn').forEach(b => b.setAttribute('aria-selected', b === btn));
+  $$('[data-panel]').forEach(p => p.classList.toggle('hidden', p.dataset.panel !== btn.dataset.tab));
+}));
+
+/* ---------- Pricing estimator ---------- */
+const calcType = $('#calcType'), calcSpeed = $('#calcSpeed'), calcAddons = $('#calcAddons'), calcVol = $('#calcVol');
+calcType.innerHTML = Object.keys(CONFIG.prices).map(k => `<option>${k}</option>`).join('');
+calcSpeed.innerHTML = CONFIG.speed.map((s, i) => `
+  <label class="cursor-pointer"><input type="radio" name="calcSpeed" value="${i}" class="peer sr-only" ${i ? '' : 'checked'}>
+  <span class="block rounded-lg border border-white/10 py-2.5 text-center text-sm peer-checked:border-emerald-400 peer-checked:bg-emerald-400/10 peer-checked:font-semibold">${s.label}<span class="block text-[11px] font-normal text-slate-400">${s.sub}</span></span></label>`).join('');
+calcAddons.innerHTML = CONFIG.addons.map((a, i) => `
+  <label class="flex items-center justify-between rounded-lg border border-white/10 px-3 py-2 text-sm">
+    <span class="flex items-center gap-2"><input type="checkbox" value="${i}" class="accent-emerald-500">${a.label}</span>
+    <span class="font-mono text-xs text-slate-400">+$${a.price}</span></label>`).join('');
+
+function calc() {
+  const base = CONFIG.prices[calcType.value];
+  const speed = CONFIG.speed[+$('input[name=calcSpeed]:checked').value];
+  const addons = $$('input:checked', calcAddons).reduce((s, c) => s + CONFIG.addons[+c.value].price, 0);
+  const vol = +calcVol.value;
+  const tier = CONFIG.volumeTiers.find(t => vol >= t.min);
+  const list = base * speed.mult + addons;
+  const per = Math.round(list * (1 - (tier ? tier.off : 0)));
+  $('#calcVolOut').textContent = vol;
+  $('#calcPer').textContent = per.toLocaleString();
+  $('#calcMonth').textContent = (per * vol).toLocaleString();
+  $('#calcSave').textContent = Math.round((list - per) * vol).toLocaleString();
+  const eta = new Date(Date.now() + speed.hours * 3600e3);
+  $('#calcEta').textContent = eta.toLocaleString([], { weekday: 'short', hour: 'numeric', minute: '2-digit' }) + ` (${speed.hours}h)`;
+  $('#calcDiscount').textContent = tier ? `Includes ${tier.off * 100}% volume discount` : 'Volume discounts from 10 reports/month';
+}
+[calcType, calcVol].forEach(el => el.addEventListener('input', calc));
+calcSpeed.addEventListener('change', calc);
+calcAddons.addEventListener('change', calc);
+calc();
+
+/* ---------- File inputs / dropzones ---------- */
+let portalFiles = [];
+const fmtSize = b => b > 1048576 ? (b / 1048576).toFixed(1) + ' MB' : Math.ceil(b / 1024) + ' KB';
+
+function renderFileList() {
+  $('#fileList').innerHTML = portalFiles.map((f, i) => `
+    <li class="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2">
+      <span class="truncate pr-3">${f.name.replace(/</g, '&lt;')}</span>
+      <span class="flex shrink-0 items-center gap-3"><span class="font-mono text-xs text-slate-400">${fmtSize(f.size)}</span>
+      <button type="button" data-rm="${i}" class="text-slate-400 hover:text-red-500" aria-label="Remove">✕</button></span></li>`).join('');
+}
+$('#fileList').addEventListener('click', e => {
+  const i = e.target.dataset.rm;
+  if (i !== undefined) { portalFiles.splice(+i, 1); renderFileList(); }
+});
+
+function addFiles(input, files) {
+  if (input.id === 'portalFiles') { portalFiles.push(...files); renderFileList(); return; }
+  const out = $('.file-count', input.closest('label'));
+  out.textContent = `${files.length} file${files.length === 1 ? '' : 's'} attached`;
+  out.classList.remove('hidden');
+  input._files = [...files];
+}
+
+$$('.dropzone').forEach(zone => {
+  const input = $('[data-file-input]', zone);
+  input.addEventListener('change', () => { addFiles(input, [...input.files]); input.value = ''; });
+  ['dragenter', 'dragover'].forEach(ev => zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.add('drag'); }));
+  ['dragleave', 'drop'].forEach(ev => zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.remove('drag'); }));
+  zone.addEventListener('drop', e => addFiles(input, [...e.dataTransfer.files]));
+});
+
+/* ---------- Order portal (multi-step) ---------- */
+const portal = $('#portal'), pForm = $('#portalForm');
+const stepNames = { 1: 'Property form', 2: 'Upload files', 3: 'Turnaround & submit' };
+let step = 1;
+
+function showStep(n) {
+  step = n;
+  $$('[data-step]', pForm).forEach(f => f.classList.toggle('hidden', f.dataset.step !== String(n)));
+  $('#stepError').classList.add('hidden');
+  const done = n === 'done';
+  $('#portalFooter').classList.toggle('hidden', done);
+  $('#progress').style.width = done ? '100%' : (n / 3 * 100) + '%';
+  if (!done) { $('#stepNum').textContent = n; $('#stepName').textContent = stepNames[n]; }
+  $('#backBtn').classList.toggle('invisible', n === 1 || done);
+  $('#nextBtn').textContent = n === 3 ? 'Submit order' : 'Continue →';
+  if (n === 3) renderSummary();
+}
+
+function renderSummary() {
+  const d = new FormData(pForm);
+  $('#summary').innerHTML = [
+    ['Report', d.get('formType')], ['Software', d.get('software')], ['Turnaround', d.get('turnaround')],
+    ['Tasks', d.getAll('tasks').join(', ') || '—'], ['Files', portalFiles.length],
+  ].map(([k, v]) => `<div class="flex justify-between gap-4"><span>${k}</span><span class="text-right text-navy-900">${v}</span></div>`).join('');
+}
+pForm.addEventListener('change', e => { if (e.target.name === 'turnaround') renderSummary(); });
+
+function openPortal(prefill) {
+  if (prefill) {
+    $('#pf-type').value = prefill.formType;
+    $('#pf-sw').value = prefill.software;
+    if (prefill.files?.length) { portalFiles.push(...prefill.files); renderFileList(); }
+  }
+  portal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  showStep(prefill ? 2 : 1);
+}
+function closePortal() { portal.classList.add('hidden'); document.body.style.overflow = ''; }
+
+$$('[data-open-portal]').forEach(b => b.addEventListener('click', () => openPortal()));
+$$('[data-close-portal]').forEach(b => b.addEventListener('click', closePortal));
+
+/* ---------- Legal modal ---------- */
+const legal = $('#legal');
+function openLegal(key) {
+  const tpl = $(`template[data-legal-doc="${key}"]`);
+  $('#legalTitle').textContent = tpl.dataset.title;
+  const body = $('#legalBody');
+  body.replaceChildren(tpl.content.cloneNode(true));
+  fillContact(body);
+  body.scrollTop = 0;
+  legal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+function closeLegal() {
+  legal.classList.add('hidden');
+  if (portal.classList.contains('hidden')) document.body.style.overflow = '';
+}
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-legal]');
+  if (btn) { e.preventDefault(); openLegal(btn.dataset.legal); }
+});
+$$('[data-close-legal]').forEach(b => b.addEventListener('click', closeLegal));
+
+addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if (!legal.classList.contains('hidden')) closeLegal();
+  else if (!portal.classList.contains('hidden')) closePortal();
+});
+
+$('#heroForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const d = new FormData(e.target);
+  openPortal({ formType: d.get('formType'), software: d.get('software'), files: $('#heroForm [data-file-input]')._files });
+});
+
+$('#backBtn').addEventListener('click', () => showStep(step - 1));
+$('#nextBtn').addEventListener('click', async () => {
+  const err = $('#stepError');
+  if (step === 1 && !$$('input[name=tasks]:checked', pForm).length) {
+    err.textContent = 'Pick at least one task.'; err.classList.remove('hidden'); return;
+  }
+  if (step === 2 && !portalFiles.length && !$('#pf-notes').value.trim()) {
+    err.textContent = 'Add at least one file, or use the notes box to tell us what you’ll send.'; err.classList.remove('hidden'); return;
+  }
+  if (step < 3) return showStep(step + 1);
+
+  const invalid = $$('[data-step="3"] [required]', pForm).find(i => !i.checkValidity());
+  if (invalid) { err.textContent = 'Please complete the highlighted fields.'; err.classList.remove('hidden'); invalid.focus(); return; }
+
+  const d = new FormData(pForm);
+  d.set('tasks', d.getAll('tasks').join(', '));
+  portalFiles.forEach(f => d.append('files', f));
+  const ok = await submitForm(d, 'New trial report order');
+  $('#doneMsg').textContent = ok === 'mail'
+    ? 'Your email app opened with the order details — attach your files there and hit send.'
+    : 'We’ll confirm by email shortly with next steps.';
+  portalFiles = []; renderFileList(); pForm.reset();
+  showStep('done');
+});
+
+/* ---------- Contact form ---------- */
+$('#contactForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const status = $('.form-status', e.target);
+  const ok = await submitForm(new FormData(e.target), 'Website inquiry');
+  status.textContent = ok === 'mail' ? 'Your email app opened with your message.' : 'Thanks — we’ll be in touch shortly.';
+  status.classList.remove('hidden');
+  e.target.reset();
+});
+
+/* ---------- Submission ---------- */
+async function submitForm(data, subject) {
+  if (CONFIG.formEndpoint) {
+    try {
+      const res = await fetch(CONFIG.formEndpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (res.ok) return 'sent';
+    } catch (_) { /* fall through to mailto */ }
+  }
+  const body = [...data.entries()].filter(([, v]) => typeof v === 'string').map(([k, v]) => `${k}: ${v}`).join('\n');
+  location.href = `mailto:${CONFIG.contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return 'mail';
+}
+</script>
+</body>
+</html>
